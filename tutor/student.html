@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+
+    <script>
+        var subjectObject = {
+          "Computer Science": {
+            "Artificial Intelligence": ["Links", "Images", "Tables", "Lists"],
+            "Cloud computing": ["Borders", "Margins", "Backgrounds", "Float"],
+            "Internet Programming": ["Variables", "Operators", "Functions", "Conditions"]    
+          },
+          "Electronics and Communication": {
+            "Signal and System": ["Variables", "Strings", "Arrays"],
+            "Integrated Electronics": ["SELECT", "UPDATE", "DELETE"],
+            "Microprocessor and Microcontroller": ["Variables", "Strings", "Arrays"]
+          },
+          "Mechanical": {
+            "Heat Transfer": ["Variables", "Strings", "Arrays"],
+            "Thermodynamics": ["SELECT", "UPDATE", "DELETE"],
+            "Fluid Mechanics": ["SELECT", "UPDATE", "DELETE"]
+          }
+        }
+        window.onload = function() {
+          var subjectSel = document.getElementById("subject");
+          var topicSel = document.getElementById("topic");
+          var chapterSel = document.getElementById("chapter");
+          for (var x in subjectObject) {
+            subjectSel.options[subjectSel.options.length] = new Option(x, x);
+          }
+          subjectSel.onchange = function() {
+            //empty Chapters- and Topics- dropdowns
+            chapterSel.length = 1;
+            topicSel.length = 1;
+            //display correct values
+            for (var y in subjectObject[this.value]) {
+              topicSel.options[topicSel.options.length] = new Option(y, y);
+            }
+          }
+          topicSel.onchange = function() {
+            //empty Chapters dropdown
+            chapterSel.length = 1;
+            //display correct values
+            var z = subjectObject[subjectSel.value][this.value];
+            for (var i = 0; i < z.length; i++) {
+              chapterSel.options[chapterSel.options.length] = new Option(z[i], z[i]);
+            }
+          }
+        }
+        </script>
+</head>
+<body>
+    <h1>Welcome</h1>
+    
+<form name="form1" id="form1" action="tutordet.php" method="post">
+Course: <select name="subject" id="subject">
+    <option value="" selected="selected">Select subject</option>
+  </select>
+  <br><br>
+Subject: <select name="topic" id="topic">
+    <option value="" selected="selected">Please select subject first</option>
+  </select>
+  <br><br>
+  <div style="display:none;">
+Chapters: <select name="chapter" id="chapter" >
+    <option value="" selected="selected">Please select topic first</option>
+  </select>
+  <br><br>
+</div>
+  <input type="submit" value="Submit">  
+</form>
+
+
+</body>
+</html>
